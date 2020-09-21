@@ -1,0 +1,63 @@
+"""
+Comentario
+multilinea  
+"""
+
+
+type Query {
+    "Lista de usuarios registrados en la base de datos (clientes/Admins)"
+    users: [User!]!
+}
+
+type Mutation {
+    register(user: UserInput!): User
+}
+
+"""
+Especificar la informacion detallada del usuario
+Vamos a tener en cuenta: 
+email = usuario del cliente de la base de datos
+Fecha de nacimiento y registro en formato ISO
+"""
+
+type User{
+    "Identificador unico"
+    id: ID!
+    "Nombre de pila"
+    name: String!
+    "Apellido de pila"
+    lastName: String!
+    "email del cliente"
+    email: String!
+    "contraseña de acceso del usuario"
+    password: String!
+    "fecha en la que se ha registrado"
+    registerDate: String!
+    "fecha de nacimiento del usuario"
+    birthday: String!
+    "Permisos del usuario"
+    role: Role!
+}
+
+"Input para añadir los datos del usuario en el registro"
+
+input UserInput{
+    id:ID
+    "Nombre de pila"
+    name: String!
+    "Apellido de pila"
+    lastName: String!
+    "email del cliente"
+    email: String!
+    "contraseña de acceso del usuario"
+    password: String!
+    "fecha de nacimiento del usuario"
+    birthday: String!
+    "Permisos del usuario"
+    role: Role=CLIENT
+}
+
+enum Role{
+    CLIENT
+    ADMIN
+}
