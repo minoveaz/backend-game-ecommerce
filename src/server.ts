@@ -31,7 +31,8 @@ const context = { db };
  
 const server = new ApolloServer({
     schema, 
-    introspection: true
+    introspection: true,
+    context
 });
 
 
