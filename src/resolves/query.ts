@@ -1,5 +1,6 @@
 import { IResolvers } from 'graphql-tools';
 import { COLLECTIONS } from '../config/constants';
+import JWT from '../lib/jwt';
 
 
 
@@ -25,21 +26,31 @@ const resolversQuery: IResolvers = {
         },
         async login(_,{email, password}, { db }){
             try{
-                const user = await db.collection(COLLECTIONS.USERS).
+                const emailVerification = await db.collection(COLLECTIONS.USERS).
                 findOne({email, password});
+                if (emailVerification === null){
+                    return{
+                        status: false,
+                        message: 'Usuario no Existe',
+                        token: null
+                    };
+                }
+                const user = await db.collection(COLLECTIONS.USERS).
+                findOne({email});
                 return {
                     status:true,
-                    message: user === null
+                    message: 
+                    user === null
                         ? 'Password y/o usuario no correctos, sesión no iniciada'
-                        : 'Lista de usuarios cargada correctamente',
-                    user,
+                        : 'Usuario cargado correctamente',
+                    token: new JWT().sign({user})
                 };
             }catch(error){
                 console.log(error);
                 return {
                     status: false,
                     message: 'Error al cargar el usuario. ',
-                    user: null, 
+                    token: null, 
                 };
             }
         }
