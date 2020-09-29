@@ -9,10 +9,12 @@ type Query {
     users: ResultUsers
     "Para iniciar la sesión del usuario"
     login(email:String!, password:String!): ResultLogin
+    "Autenticarnos mediante token"
+    me: ResultUser
 }
 
 type Mutation {
-    register(user: UserInput!): User
+    register(user: UserInput!): ResultUser
 }
 
 "Interface para especificar las propiedades obligatorias en las respuestas"
@@ -30,6 +32,16 @@ type ResultUsers implements Result{
     message: String!
     "Lista de usuarios registrados en la base de datos (clientes/Admins)"
     users: [User!]!
+}
+
+
+type ResultUser implements Result{
+    "Estado de la operación"
+    status: Boolean!
+    "Mensaje de la operación para dar Feedback"
+    message: String!
+    "Información del usuario"
+    users: User
 }
 
 type ResultLogin implements Result{
