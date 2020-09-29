@@ -1,6 +1,6 @@
 {
     "name": "backend-game-ecommerce",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Backend Project API GraphQL online Store - MEAN+G",
     "main": "build/server.js",
     "scripts": {
