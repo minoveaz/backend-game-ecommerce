@@ -1,11 +1,9 @@
 import { IResolvers } from 'graphql-tools';
-import { COLLECTIONS, EXPIRETIME, MESSAGES } from '../config/constants';
-import JWT from '../lib/jwt';
+import { COLLECTIONS, EXPIRETIME, MESSAGES } from './../../config/constants';
+import JWT from './../../lib/jwt';
 import bcrypt from 'bcrypt';
 
-
-
-const resolversQuery: IResolvers = {
+const resolversUserQuery: IResolvers = {
 
     Query:{
         async users(_, __, { db }){
@@ -82,4 +80,4 @@ const resolversQuery: IResolvers = {
     },
 };
 
-export default resolversQuery;
+export default resolversUserQuery;

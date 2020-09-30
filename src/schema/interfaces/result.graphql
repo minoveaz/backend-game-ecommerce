@@ -1,0 +1,6 @@
+interface Result {
+    "Estado de la operación"
+    status: Boolean!
+    "Mensaje de la operación para dar Feedback"
+    message: String!
+}
