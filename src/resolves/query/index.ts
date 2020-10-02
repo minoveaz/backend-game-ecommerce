@@ -1,9 +1,8 @@
 import resolversProductsQuery from './products';
 import resolversUserQuery from './user';
+import GMR from 'graphql-merge-resolvers';
 
-const GMR = require('@wiicamp/graphql-merge-resolvers');
-
-const queryResolvers = GMR.Merge([
+const queryResolvers = GMR.merge([
     resolversUserQuery,
     resolversProductsQuery
 ]);
