@@ -4,6 +4,7 @@ import JWT from './../../lib/jwt';
 import bcrypt from 'bcrypt';
 import { findOneElement, findElements } from '../../lib/db-operations';
 
+
 const resolversUserQuery: IResolvers = {
 
     Query:{
@@ -34,7 +35,7 @@ const resolversUserQuery: IResolvers = {
                     };
                 }
                 const passwordCheck = bcrypt.compareSync(password, user.password);
-
+                
                 if (passwordCheck !== null ){
                     delete user.password;
                     delete user.birthday;
@@ -49,7 +50,8 @@ const resolversUserQuery: IResolvers = {
                     token: 
                         !passwordCheck
                         ? null
-                        : new JWT().sign({user},EXPIRETIME.H24)
+                        : new JWT().sign({user},EXPIRETIME.H24),
+                    user
                 };
             }catch(error){
                 console.log(error);
@@ -73,7 +75,7 @@ const resolversUserQuery: IResolvers = {
             return{
                 status: true,
                 message: 'Usuario autenticado correctamente mediante el token',
-                users: Object.values(info)[0]
+                user: Object.values(info)[0]
             };
         }
     },
