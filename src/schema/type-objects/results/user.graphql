@@ -4,5 +4,5 @@ type ResultUser implements Result{
     "Mensaje de la operación para dar Feedback"
     message: String!
     "Información del usuario"
-    users: User
+    user: User
 }
